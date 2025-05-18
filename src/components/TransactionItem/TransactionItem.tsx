@@ -5,9 +5,9 @@ import {colors} from '../../res/colors';
 import {Transaction, TransactionStatus} from '../../mock/mockDataTransactions';
 import {formatAmount} from '../../utils/helpers';
 import FastImage from 'react-native-fast-image';
-import Checkmark from '../assets/checkMark.png';
-import Cross from '../assets/redCross.png';
-import Clock from '../assets/clock.png';
+import Checkmark from '../../assets/checkMark.png';
+import Cross from '../../assets/redCross.png';
+import Clock from '../../assets/clock.png';
 
 interface TransactionItemProps {
   item: Transaction;

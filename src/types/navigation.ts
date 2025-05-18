@@ -4,6 +4,7 @@ import {
   SCREEN_HOME,
   SCREEN_TRANSACTION_DETAILS,
   SCREEN_PROFILE_MAIN,
+  SCREEN_EDIT_PROFILE,
   STACK_HOME,
   STACK_PROFILE,
 } from '../res/routes';
@@ -26,4 +27,5 @@ export type HomeStackParamList = {
 
 export type ProfileStackParamList = {
   [SCREEN_PROFILE_MAIN]: undefined;
+  [SCREEN_EDIT_PROFILE]: undefined;
 };

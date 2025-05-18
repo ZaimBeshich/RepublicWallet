@@ -24,7 +24,7 @@ const HomeScreen = ({navigation}: {navigation: any}) => {
 
   return (
     <View style={styles.flex}>
-      <Header title="Home" />
+      <Header title="Home" hideBackButton />
       <View style={styles.container}>
         <FlatList
           data={mockTransactions}

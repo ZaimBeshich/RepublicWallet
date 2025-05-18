@@ -11,3 +11,4 @@ export const SCREEN_TRANSACTION_DETAILS = 'TransactionDetails';
 
 // Profile Stack
 export const SCREEN_PROFILE_MAIN = 'ProfileMain';
+export const SCREEN_EDIT_PROFILE = 'EditProfile';
