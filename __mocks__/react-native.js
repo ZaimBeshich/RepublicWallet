@@ -1,5 +1,7 @@
 const StyleSheet = {
   create: styles => styles,
+  flatten: style => style,
+  compose: (style1, style2) => ({...style1, ...style2}),
 };
 
 const Platform = {
@@ -19,6 +21,17 @@ const PixelRatio = {
   roundToNearestPixel: size => Math.round(size),
 };
 
+const Animated = {
+  createAnimatedComponent: component => component,
+  Value: jest.fn(),
+  timing: jest.fn(),
+  spring: jest.fn(),
+  View: 'Animated.View',
+  Text: 'Animated.Text',
+};
+
+const requireNativeComponent = name => name;
+
 const View = 'View';
 const Text = 'Text';
 const TouchableOpacity = 'TouchableOpacity';
@@ -31,6 +44,8 @@ module.exports = {
   Platform,
   Dimensions,
   PixelRatio,
+  Animated,
+  requireNativeComponent,
   View,
   Text,
   TouchableOpacity,
