@@ -28,7 +28,7 @@ const WalletSettingsScreen = ({navigation}: {navigation: any}) => {
     }
 
     await updateUserSettings({
-      monthlyLimit: Number(monthlyLimit),
+      monthlyLimit: Number(monthlyLimit) ?? user.settings.monthlyLimit,
       displayCurrency: selectedCurrency,
       availableCurrencies: user.settings.availableCurrencies,
     });
