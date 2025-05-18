@@ -75,3 +75,13 @@ export const mockTransactions: Transaction[] = [
     status: 'completed',
   },
 ];
+
+export const mockUser = {
+  name: 'Zaim',
+  surname: 'Beshich',
+  balance: 100000,
+  phoneNumber: '+7 (999) 123-45-67',
+  currency: 'USD',
+  walletId: 'WALLET-123456',
+  spendingLimit: 1000,
+};
