@@ -1,13 +1,12 @@
 import React, {memo} from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
-import {ScaledSheet} from 'react-native-size-matters';
-import {colors} from '../../res/colors';
 import {Transaction, TransactionStatus} from '../../mock/mockDataTransactions';
 import {formatAmount} from '../../utils/helpers';
 import FastImage from 'react-native-fast-image';
 import Checkmark from '../../assets/checkMark.png';
 import Cross from '../../assets/redCross.png';
 import Clock from '../../assets/clock.png';
+import {styles} from './TransactionItem.styles';
 
 interface TransactionItemProps {
   item: Transaction;
@@ -75,53 +74,3 @@ export const TransactionItem = ({item, onPress}: TransactionItemProps) => {
     </TouchableOpacity>
   );
 };
-
-const styles = ScaledSheet.create({
-  transactionItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingVertical: '8@mvs',
-  },
-  transactionBlock: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: '8@s',
-    flexShrink: 1,
-  },
-  transactionInfo: {
-    flexShrink: 1,
-    flexDirection: 'column',
-    gap: '8@vs',
-    minWidth: 0,
-  },
-  amountContainer: {
-    alignItems: 'flex-end',
-    justifyContent: 'center',
-    flexShrink: 0,
-  },
-  amountText: {
-    fontSize: '14@ms',
-    fontWeight: '500',
-    textAlign: 'right',
-  },
-  amountTextPlus: {
-    color: colors.system.green,
-  },
-  amountTextMinus: {
-    color: colors.system.red,
-  },
-  text: {
-    color: colors.text.primary,
-  },
-  transactionDescription: {
-    fontSize: '16@ms',
-    fontWeight: '500',
-    color: colors.text.primary,
-  },
-  transactionImage: {
-    width: '24@ms',
-    height: '24@ms',
-  },
-});

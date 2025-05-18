@@ -1,13 +1,12 @@
 import {View, Text, FlatList} from 'react-native';
 import React from 'react';
 import Header from '../../components/Header/Header';
-import {colors} from '../../res/colors';
-import {ScaledSheet} from 'react-native-size-matters';
 import {mockTransactions} from '../../mock/mockDataTransactions';
 import {Transaction} from '../../mock/mockDataTransactions';
 import {SCREEN_TRANSACTION_DETAILS} from '../../res/routes';
 import {Separator} from '../../components/Separator';
 import {TransactionItem} from '../../components/TransactionItem/TransactionItem';
+import {styles} from './HomeScreen.styles';
 
 const HomeScreen = ({navigation}: {navigation: any}) => {
   const renderSubHeader = () => {
@@ -40,22 +39,3 @@ const HomeScreen = ({navigation}: {navigation: any}) => {
 };
 
 export default HomeScreen;
-
-const styles = ScaledSheet.create({
-  flex: {
-    flex: 1,
-  },
-  container: {
-    flex: 1,
-    paddingHorizontal: '16@ms',
-  },
-  subheaderContainer: {
-    paddingVertical: '4@mvs',
-  },
-  subheaderText: {
-    textAlign: 'center',
-    fontSize: '18@ms',
-    fontWeight: '500',
-    color: colors.text.primary,
-  },
-});
