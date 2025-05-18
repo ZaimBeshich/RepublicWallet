@@ -2,6 +2,7 @@ import React, {createContext, useContext, useState} from 'react';
 import {Transaction, User, UserSettings} from '../types/api';
 import {api} from '../services/api';
 import {storage} from '../services/storage';
+import {wait} from '../utils/helpers';
 
 interface AppContextType {
   transactions: Transaction[];
@@ -44,11 +45,10 @@ export const AppProvider: React.FC<{children: React.ReactNode}> = ({
       if (cachedTransactions.length) {
         setTransactions(cachedTransactions);
       }
-    } catch (err) {
-      console.error(err);
-    } finally {
       setIsUserLoading(false);
       setIsTransactionsLoading(false);
+    } catch (err) {
+      console.error(err);
     }
   };
 
@@ -60,6 +60,7 @@ export const AppProvider: React.FC<{children: React.ReactNode}> = ({
 
     try {
       await loadCachedData();
+      await wait(5000);
       const [transactionsRes, userRes] = await Promise.all([
         api.getTransactions(),
         api.getUser(),
