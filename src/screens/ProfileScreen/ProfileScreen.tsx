@@ -9,7 +9,7 @@ import {useApp} from '../../context/AppContext';
 import LoadingScreen from '../../components/LoadingScreen/LoadingScreen';
 
 const ProfileScreen = ({navigation}: {navigation: any}) => {
-  const {user, isUserLoading, isSettingsLoading} = useApp();
+  const {user, isUserLoading} = useApp();
 
   const onEditProfilePress = () => {
     navigation.navigate(SCREEN_EDIT_PROFILE);
@@ -23,12 +23,10 @@ const ProfileScreen = ({navigation}: {navigation: any}) => {
     return null;
   }
 
-  console.log({user});
-
   return (
     <View style={styles.container}>
       <Header title="Profile" hideBackButton />
-      <LoadingScreen isLoading={isUserLoading || isSettingsLoading}>
+      <LoadingScreen isLoading={isUserLoading}>
         <View style={styles.content}>
           <View style={styles.profileInfo}>
             <View style={styles.avatar}>
@@ -43,7 +41,7 @@ const ProfileScreen = ({navigation}: {navigation: any}) => {
             <Text style={styles.balance}>
               {formatAmount({
                 amount: user.balance,
-                currency: user.currency,
+                currency: user.settings.displayCurrency,
               })}
             </Text>
           </View>

@@ -13,6 +13,8 @@ export const colors = {
     secondary: '#EBEBF5',
     tertiary: '#EBEBF599',
     disabled: '#EBEBF54D',
+    red: '#FF3B30',
+    green: '#32D74B',
   },
   border: {
     primary: '#38383A',

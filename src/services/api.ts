@@ -1,6 +1,8 @@
-import {Transaction, User, Settings, ApiResponse} from '../types/api';
+import {Transaction, User, UserSettings, ApiResponse} from '../types/api';
+import {wait} from '../utils/helpers';
 
 const API_URL = 'http://localhost:3000';
+const USER_ID = 'USER-1';
 
 const handleResponse = async (response: Response) => {
   if (!response.ok) {
@@ -13,6 +15,7 @@ const handleResponse = async (response: Response) => {
 export const api = {
   getTransactions: async (): Promise<ApiResponse<Transaction[]>> => {
     try {
+      await wait(1000);
       const response = await fetch(`${API_URL}/transactions`);
       return handleResponse(response);
     } catch (error) {
@@ -23,7 +26,8 @@ export const api = {
 
   getUser: async (): Promise<ApiResponse<User>> => {
     try {
-      const response = await fetch(`${API_URL}/user`);
+      await wait(800);
+      const response = await fetch(`${API_URL}/users/${USER_ID}`);
       return handleResponse(response);
     } catch (error) {
       console.error('Error fetching user:', error);
@@ -31,14 +35,15 @@ export const api = {
     }
   },
 
-  updateUser: async (userData: Partial<User>): Promise<ApiResponse<User>> => {
+  updateUser: async (user: User): Promise<ApiResponse<User>> => {
     try {
-      const response = await fetch(`${API_URL}/user`, {
+      await wait(1200);
+      const response = await fetch(`${API_URL}/users/${USER_ID}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(userData),
+        body: JSON.stringify(user),
       });
       return handleResponse(response);
     } catch (error) {
@@ -47,30 +52,31 @@ export const api = {
     }
   },
 
-  getSettings: async (): Promise<ApiResponse<Settings>> => {
+  updateUserSettings: async (
+    settings: UserSettings,
+  ): Promise<ApiResponse<User>> => {
     try {
-      const response = await fetch(`${API_URL}/settings`);
-      return handleResponse(response);
-    } catch (error) {
-      console.error('Error fetching settings:', error);
-      throw error;
-    }
-  },
-
-  updateSettings: async (
-    settingsData: Partial<Settings>,
-  ): Promise<ApiResponse<Settings>> => {
-    try {
-      const response = await fetch(`${API_URL}/settings`, {
-        method: 'PUT',
+      await wait(1000);
+      const response = await fetch(`${API_URL}/users/${USER_ID}`, {
+        method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(settingsData),
+        body: JSON.stringify({
+          settings: {
+            ...settings,
+            availableCurrencies: settings.availableCurrencies || [
+              'USD',
+              'EUR',
+              'GBP',
+              'RUB',
+            ],
+          },
+        }),
       });
       return handleResponse(response);
     } catch (error) {
-      console.error('Error updating settings:', error);
+      console.error('Error updating user settings:', error);
       throw error;
     }
   },

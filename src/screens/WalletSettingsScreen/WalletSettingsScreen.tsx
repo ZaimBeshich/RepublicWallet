@@ -11,22 +11,26 @@ import CustomButton from '../../components/Button/CustomButton';
 import {styles} from './WalletSettingsScreen.styles';
 import {colors} from '../../res/colors';
 import {useApp} from '../../context/AppContext';
-import LoadingScreen from '../../components/LoadingScreen/LoadingScreen';
 
 const WalletSettingsScreen = ({navigation}: {navigation: any}) => {
-  const {settings, updateSettings, isSettingsLoading} = useApp();
+  const {user, updateUserSettings, isUserLoading} = useApp();
   const [monthlyLimit, setMonthlyLimit] = useState(
-    settings?.monthlyLimit.toString() || '1000',
+    user?.settings.monthlyLimit.toString() || '1000',
   );
   const [selectedCurrency, setSelectedCurrency] = useState(
-    settings?.displayCurrency || 'USD',
+    user?.settings.displayCurrency || 'USD',
   );
   const [showCurrencySelector, setShowCurrencySelector] = useState(false);
 
   const onSave = async () => {
-    await updateSettings({
+    if (!user) {
+      return;
+    }
+
+    await updateUserSettings({
       monthlyLimit: Number(monthlyLimit),
       displayCurrency: selectedCurrency,
+      availableCurrencies: user.settings.availableCurrencies,
     });
     navigation.goBack();
   };
@@ -34,67 +38,65 @@ const WalletSettingsScreen = ({navigation}: {navigation: any}) => {
   return (
     <View style={styles.container}>
       <Header title="Wallet Settings" />
-      <LoadingScreen isLoading={isSettingsLoading}>
-        <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
-          <View style={styles.settingsBlock}>
-            <View style={styles.row}>
-              <Text style={styles.label}>Monthly Spending Limit</Text>
-              <TextInput
-                style={styles.input}
-                value={monthlyLimit}
-                onChangeText={setMonthlyLimit}
-                keyboardType="numeric"
-                placeholder="Enter limit"
-                placeholderTextColor={colors.text.tertiary}
-                clearButtonMode="while-editing"
-              />
-            </View>
-
-            <View style={styles.row}>
-              <Text style={styles.label}>Display Currency</Text>
-              <TouchableOpacity
-                style={styles.currencySelector}
-                onPress={() => setShowCurrencySelector(!showCurrencySelector)}>
-                <Text style={styles.currencyText}>
-                  {selectedCurrency || 'Select Currency'}
-                  {'   ↓'}
-                </Text>
-              </TouchableOpacity>
-            </View>
-
-            {showCurrencySelector && (
-              <View style={styles.settingsBlock}>
-                {settings?.availableCurrencies.map(currency => (
-                  <TouchableOpacity
-                    key={currency}
-                    style={styles.row}
-                    activeOpacity={0.8}
-                    onPress={() => {
-                      setSelectedCurrency(currency);
-                      setShowCurrencySelector(false);
-                    }}>
-                    <Text style={styles.label}>{currency}</Text>
-                    {selectedCurrency === currency && (
-                      <Text
-                        style={[styles.currencyText, {color: colors.primary}]}>
-                        ✓
-                      </Text>
-                    )}
-                  </TouchableOpacity>
-                ))}
-              </View>
-            )}
+      <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
+        <View style={styles.settingsBlock}>
+          <View style={styles.row}>
+            <Text style={styles.label}>Monthly Spending Limit</Text>
+            <TextInput
+              style={styles.input}
+              value={monthlyLimit}
+              onChangeText={setMonthlyLimit}
+              keyboardType="numeric"
+              placeholder="Enter limit"
+              placeholderTextColor={colors.text.tertiary}
+              clearButtonMode="while-editing"
+            />
           </View>
-        </ScrollView>
 
-        <View style={styles.buttonContainer}>
-          <CustomButton
-            title="Save Changes"
-            onPress={onSave}
-            isLoading={isSettingsLoading}
-          />
+          <View style={styles.row}>
+            <Text style={styles.label}>Display Currency</Text>
+            <TouchableOpacity
+              style={styles.currencySelector}
+              onPress={() => setShowCurrencySelector(!showCurrencySelector)}>
+              <Text style={styles.currencyText}>
+                {selectedCurrency || 'Select Currency'}
+                {'   ↓'}
+              </Text>
+            </TouchableOpacity>
+          </View>
+
+          {showCurrencySelector && (
+            <View style={styles.settingsBlock}>
+              {user?.settings.availableCurrencies.map((currency: string) => (
+                <TouchableOpacity
+                  key={currency}
+                  style={styles.row}
+                  activeOpacity={0.8}
+                  onPress={() => {
+                    setSelectedCurrency(currency);
+                    setShowCurrencySelector(false);
+                  }}>
+                  <Text style={styles.label}>{currency}</Text>
+                  {selectedCurrency === currency && (
+                    <Text
+                      style={[styles.currencyText, {color: colors.primary}]}>
+                      ✓
+                    </Text>
+                  )}
+                </TouchableOpacity>
+              ))}
+            </View>
+          )}
         </View>
-      </LoadingScreen>
+      </ScrollView>
+
+      <View style={styles.buttonContainer}>
+        <CustomButton
+          title="Save Changes"
+          onPress={onSave}
+          isLoading={isUserLoading}
+        />
+      </View>
     </View>
   );
 };

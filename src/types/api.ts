@@ -12,6 +12,12 @@ export interface Transaction {
   status: TransactionStatus;
 }
 
+export interface UserSettings {
+  monthlyLimit: number;
+  displayCurrency: string;
+  availableCurrencies: string[];
+}
+
 export interface User {
   id: string;
   name: string;
@@ -19,14 +25,7 @@ export interface User {
   phoneNumber: string;
   walletId: string;
   balance: number;
-  currency: string;
-}
-
-export interface Settings {
-  id: string;
-  monthlyLimit: number;
-  displayCurrency: string;
-  availableCurrencies: string[];
+  settings: UserSettings;
 }
 
 export interface ApiResponse<T> {

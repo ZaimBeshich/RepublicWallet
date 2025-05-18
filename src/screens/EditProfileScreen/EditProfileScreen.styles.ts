@@ -30,5 +30,6 @@ export const styles = ScaledSheet.create({
     paddingVertical: '12@mvs',
     borderTopWidth: 1,
     borderTopColor: colors.border.primary,
+    paddingHorizontal: '16@ms',
   },
 });
