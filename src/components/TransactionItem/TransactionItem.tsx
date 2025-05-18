@@ -1,9 +1,9 @@
 import React, {memo} from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 import {ScaledSheet} from 'react-native-size-matters';
-import {colors} from '../res/colors';
-import {Transaction, TransactionStatus} from '../mock/mockDataTransactions';
-import {formatAmount} from '../utils/helpers';
+import {colors} from '../../res/colors';
+import {Transaction, TransactionStatus} from '../../mock/mockDataTransactions';
+import {formatAmount} from '../../utils/helpers';
 import FastImage from 'react-native-fast-image';
 import Checkmark from '../assets/checkMark.png';
 import Cross from '../assets/redCross.png';

@@ -7,7 +7,7 @@ import {mockTransactions} from '../../mock/mockDataTransactions';
 import {Transaction} from '../../mock/mockDataTransactions';
 import {SCREEN_TRANSACTION_DETAILS} from '../../res/routes';
 import {Separator} from '../../components/Separator';
-import {TransactionItem} from '../../components/TransactionItem';
+import {TransactionItem} from '../../components/TransactionItem/TransactionItem';
 
 const HomeScreen = ({navigation}: {navigation: any}) => {
   const renderSubHeader = () => {

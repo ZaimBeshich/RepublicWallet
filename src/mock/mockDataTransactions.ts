@@ -62,7 +62,7 @@ export const mockTransactions: Transaction[] = [
     category: 'Groceries',
     description: 'Grocery shopping at Pyaterochka',
     date: '2024-03-14T15:30:00Z',
-    status: 'completed',
+    status: 'failed',
   },
   {
     id: 'TRX-8F4D-9E2A-1B5C',

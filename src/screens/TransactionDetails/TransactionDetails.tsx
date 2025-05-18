@@ -17,7 +17,6 @@ type Props = NativeStackScreenProps<
 
 const TransactionDetails = ({route}: Props) => {
   const {item} = route.params;
-  console.log({item});
   return (
     <View style={styles.container}>
       <Header
