@@ -34,7 +34,7 @@ const CustomButton = ({
       disabled={isDisabled || isLoading}
       activeOpacity={0.8}>
       {isLoading ? (
-        <ActivityIndicator color={colors.text.primary} />
+        <ActivityIndicator color={colors.text.primary} size="small" />
       ) : (
         <Text style={styles.title}>{title}</Text>
       )}
