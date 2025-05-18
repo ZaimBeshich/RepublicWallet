@@ -12,9 +12,9 @@ export const styles = ScaledSheet.create({
   },
   profileInfo: {
     alignItems: 'center',
-    marginTop: '24@mvs',
+    marginBottom: '32@mvs',
   },
-  avatarContainer: {
+  avatar: {
     width: '80@ms',
     height: '80@ms',
     borderRadius: '40@ms',
@@ -28,19 +28,17 @@ export const styles = ScaledSheet.create({
     fontWeight: '600',
     color: colors.text.primary,
   },
-  nameText: {
+  name: {
     fontSize: '24@ms',
     fontWeight: '600',
     color: colors.text.primary,
     marginBottom: '8@mvs',
   },
-  balanceText: {
-    fontSize: '20@ms',
-    fontWeight: '500',
+  balance: {
+    fontSize: '18@ms',
     color: colors.text.secondary,
   },
   buttonsContainer: {
-    marginTop: '32@mvs',
     gap: '16@mvs',
   },
 });

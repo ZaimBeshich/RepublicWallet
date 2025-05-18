@@ -1,59 +1,62 @@
-import {View, Text} from 'react-native';
 import React from 'react';
+import {View, Text} from 'react-native';
 import Header from '../../components/Header/Header';
 import {formatAmount} from '../../utils/helpers';
-import {SCREEN_EDIT_PROFILE} from '../../res/routes';
+import {SCREEN_EDIT_PROFILE, SCREEN_WALLET_SETTINGS} from '../../res/routes';
 import CustomButton from '../../components/Button/CustomButton';
 import {styles} from './ProfileScreen.styles';
-
-const mockUser = {
-  name: 'John',
-  surname: 'Doe',
-  balance: {
-    amount: 15000,
-    currency: 'USD',
-  },
-};
+import {useApp} from '../../context/AppContext';
+import LoadingScreen from '../../components/LoadingScreen/LoadingScreen';
 
 const ProfileScreen = ({navigation}: {navigation: any}) => {
+  const {user, isUserLoading, isSettingsLoading} = useApp();
+
   const onEditProfilePress = () => {
     navigation.navigate(SCREEN_EDIT_PROFILE);
   };
 
   const onWalletSettingsPress = () => {
-    console.log('wallet');
+    navigation.navigate(SCREEN_WALLET_SETTINGS);
   };
+
+  if (!user) {
+    return null;
+  }
+
+  console.log({user});
 
   return (
     <View style={styles.container}>
       <Header title="Profile" hideBackButton />
-      <View style={styles.content}>
-        <View style={styles.profileInfo}>
-          <View style={styles.avatarContainer}>
-            <Text style={styles.avatarText}>
-              {mockUser.name[0]}
-              {mockUser.surname[0]}
+      <LoadingScreen isLoading={isUserLoading || isSettingsLoading}>
+        <View style={styles.content}>
+          <View style={styles.profileInfo}>
+            <View style={styles.avatar}>
+              <Text style={styles.avatarText}>
+                {user.name[0]}
+                {user.surname[0]}
+              </Text>
+            </View>
+            <Text style={styles.name}>
+              {user.name} {user.surname}
+            </Text>
+            <Text style={styles.balance}>
+              {formatAmount({
+                amount: user.balance,
+                currency: user.currency,
+              })}
             </Text>
           </View>
-          <Text style={styles.nameText}>
-            {mockUser.name} {mockUser.surname}
-          </Text>
-          <Text style={styles.balanceText}>
-            {formatAmount({
-              amount: mockUser.balance.amount,
-              currency: mockUser.balance.currency,
-            })}
-          </Text>
-        </View>
 
-        <View style={styles.buttonsContainer}>
-          <CustomButton title="Edit Profile" onPress={onEditProfilePress} />
-          <CustomButton
-            title="Wallet Settings"
-            onPress={onWalletSettingsPress}
-          />
+          <View style={styles.buttonsContainer}>
+            <CustomButton title="Edit Profile" onPress={onEditProfilePress} />
+            <CustomButton
+              title="Wallet Settings"
+              onPress={onWalletSettingsPress}
+            />
+          </View>
         </View>
-      </View>
+      </LoadingScreen>
     </View>
   );
 };

@@ -1,6 +1,6 @@
 import React, {memo} from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
-import {Transaction, TransactionStatus} from '../../mock/mockDataTransactions';
+import {Transaction, TransactionStatus} from '../../mock/mockData';
 import {formatAmount} from '../../utils/helpers';
 import FastImage from 'react-native-fast-image';
 import Checkmark from '../../assets/checkMark.png';
