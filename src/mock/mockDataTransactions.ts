@@ -1,5 +1,7 @@
 export type TransactionType = 'income' | 'expense' | 'transfer';
 
+export type TransactionStatus = 'completed' | 'pending' | 'failed';
+
 export interface Transaction {
   id: string;
   type: TransactionType;
@@ -8,7 +10,7 @@ export interface Transaction {
   category: string;
   description: string;
   date: string;
-  status: 'completed' | 'pending' | 'failed';
+  status: TransactionStatus;
 }
 
 export const mockTransactions: Transaction[] = [
