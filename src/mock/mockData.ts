@@ -1,17 +1,4 @@
-export type TransactionType = 'income' | 'expense' | 'transfer';
-
-export type TransactionStatus = 'completed' | 'pending' | 'failed';
-
-export interface Transaction {
-  id: string;
-  type: TransactionType;
-  amount: number;
-  currency: string;
-  category: string;
-  description: string;
-  date: string;
-  status: TransactionStatus;
-}
+import {Transaction} from '../types/api';
 
 export const mockTransactions: Transaction[] = [
   {

@@ -1,12 +1,12 @@
 import React, {memo} from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
-import {Transaction, TransactionStatus} from '../../mock/mockData';
 import {formatAmount} from '../../utils/helpers';
 import FastImage from 'react-native-fast-image';
 import Checkmark from '../../assets/checkMark.png';
 import Cross from '../../assets/redCross.png';
 import Clock from '../../assets/clock.png';
 import {styles} from './TransactionItem.styles';
+import {Transaction, TransactionStatus} from '../../types/api';
 
 interface TransactionItemProps {
   item: Transaction;

@@ -1,4 +1,3 @@
-import {Transaction} from '../mock/mockData';
 import {
   ROOT_MAIN,
   SCREEN_HOME,
@@ -9,6 +8,7 @@ import {
   STACK_HOME,
   STACK_PROFILE,
 } from '../res/routes';
+import {Transaction} from './api';
 
 export type RootStackParamList = {
   [ROOT_MAIN]: undefined;
