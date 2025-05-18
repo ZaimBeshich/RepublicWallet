@@ -17,11 +17,17 @@ const Tabs = () => {
       screenOptions={{
         tabBarActiveTintColor: colors.primary,
         tabBarInactiveTintColor: colors.text.tertiary,
+        tabBarLabelPosition: 'beside-icon',
         tabBarStyle: {
           backgroundColor: colors.background.secondary,
           borderTopColor: colors.border.primary,
         },
+        tabBarLabelStyle: {
+          fontSize: 16,
+          fontWeight: '600',
+        },
         headerShown: false,
+        tabBarIcon: () => null,
       }}>
       <Tab.Screen name={STACK_HOME} component={HomeStack} />
       <Tab.Screen name={STACK_PROFILE} component={ProfileStack} />
