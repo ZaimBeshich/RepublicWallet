@@ -6,9 +6,9 @@ const USER_ID = 'USER-1';
 
 const handleResponse = async (response: Response) => {
   if (!response.ok) {
-    const errorData = await response.json().catch(() => ({}));
+    const errorData = await response.json();
     throw new Error(
-      errorData.message || `HTTP error! status: ${response.status}`,
+      errorData.message || `Network error! status: ${response.status}`,
     );
   }
   const data = await response.json();

@@ -31,8 +31,7 @@ const WalletSettingsScreen = ({navigation}: {navigation: any}) => {
       monthlyLimit: Number(monthlyLimit) ?? user.settings.monthlyLimit,
       displayCurrency: selectedCurrency,
       availableCurrencies: user.settings.availableCurrencies,
-    });
-    navigation.goBack();
+    }).then(() => navigation.goBack());
   };
 
   return (

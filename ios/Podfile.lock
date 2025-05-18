@@ -1587,6 +1587,27 @@ PODS:
     - React-logger (= 0.76.8)
     - React-perflogger (= 0.76.8)
     - React-utils (= 0.76.8)
+  - RNCAsyncStorage (2.1.2):
+    - DoubleConversion
+    - glog
+    - hermes-engine
+    - RCT-Folly (= 2024.01.01.00)
+    - RCTRequired
+    - RCTTypeSafety
+    - React-Core
+    - React-debug
+    - React-Fabric
+    - React-featureflags
+    - React-graphics
+    - React-ImageManager
+    - React-NativeModulesApple
+    - React-RCTFabric
+    - React-rendererdebug
+    - React-utils
+    - ReactCodegen
+    - ReactCommon/turbomodule/bridging
+    - ReactCommon/turbomodule/core
+    - Yoga
   - RNFastImage (8.6.3):
     - React-Core
     - SDWebImage (~> 5.11.1)
@@ -1711,6 +1732,7 @@ DEPENDENCIES:
   - React-utils (from `../node_modules/react-native/ReactCommon/react/utils`)
   - ReactCodegen (from `build/generated/ios`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
+  - "RNCAsyncStorage (from `../node_modules/@react-native-async-storage/async-storage`)"
   - RNFastImage (from `../node_modules/react-native-fast-image`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
@@ -1850,6 +1872,8 @@ EXTERNAL SOURCES:
     :path: build/generated/ios
   ReactCommon:
     :path: "../node_modules/react-native/ReactCommon"
+  RNCAsyncStorage:
+    :path: "../node_modules/@react-native-async-storage/async-storage"
   RNFastImage:
     :path: "../node_modules/react-native-fast-image"
   RNScreens:
@@ -1922,6 +1946,7 @@ SPEC CHECKSUMS:
   React-utils: 8c9c721b3927ff145c3ea5b6edb5ebb38c578563
   ReactCodegen: cb798eece8fb8b4c98689302d76608cdca62b563
   ReactCommon: 90c3783fe9735fc5aeaf3064eca54aac277bb976
+  RNCAsyncStorage: d1a3d7b8d4e234191fd5edc850f965e76f5fb387
   RNFastImage: 5c9c9fed9c076e521b3f509fe79e790418a544e8
   RNScreens: 34770a3bf9e25f54c8e4683c2b20a20ab2b0c3a4
   SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d

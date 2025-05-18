@@ -5,9 +5,26 @@ import {theme} from './src/res/theme';
 import {AppProvider, useApp} from './src/context/AppContext';
 import {StyleSheet, View} from 'react-native';
 import {ErrorScreen} from './src/components/ErrorScreen/ErrorScreen';
+import Toast from 'react-native-toast-message';
 
 const AppContent = () => {
-  const {init, error} = useApp();
+  const {init, error, networkError, setNetworkError} = useApp();
+
+  useEffect(() => {
+    const showToast = () => {
+      Toast.show({
+        text1: networkError || 'Something went wrong',
+        type: 'error',
+        visibilityTime: 6000,
+        position: 'top',
+        topOffset: 150,
+      });
+      setNetworkError(null);
+    };
+    if (networkError) {
+      showToast();
+    }
+  }, [networkError, setNetworkError]);
 
   useEffect(() => {
     init();
@@ -28,6 +45,7 @@ function App(): React.JSX.Element {
           <AppContent />
         </AppProvider>
       </SafeAreaProvider>
+      <Toast />
     </View>
   );
 }

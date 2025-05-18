@@ -1,3 +1,4 @@
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -5,7 +6,6 @@ import {
   ScrollView,
   KeyboardAvoidingView,
 } from 'react-native';
-import React, {useState, useCallback} from 'react';
 import Header from '../../components/Header/Header';
 import CustomButton from '../../components/Button/CustomButton';
 import {styles} from './EditProfileScreen.styles';
@@ -14,31 +14,33 @@ import {useApp} from '../../context/AppContext';
 
 const EditProfileScreen = ({navigation}: {navigation: any}) => {
   const {user, updateUser, isUserLoading} = useApp();
-  const [name, setName] = useState(user?.name);
-  const [surname, setSurname] = useState(user?.surname);
+  const [name, setName] = useState(user?.name || '');
+  const [surname, setSurname] = useState(user?.surname || '');
   const [phoneNumber, setPhoneNumber] = useState(user?.phoneNumber);
   const [walletId, setWalletId] = useState(user?.walletId);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const onSave = useCallback(async () => {
+  const handleSave = async () => {
     if (!user) {
       return;
     }
 
+    setIsSubmitting(true);
     try {
       await updateUser({
-        id: user.id,
-        name: name || user.name,
-        surname: surname || user.surname,
+        ...user,
+        name,
+        surname,
         phoneNumber: phoneNumber || user.phoneNumber,
         walletId: walletId || user.walletId,
-        balance: user.balance,
-        settings: user.settings,
       });
       navigation.goBack();
     } catch (error) {
-      console.error('Error updating user:', error);
+      //
+    } finally {
+      setIsSubmitting(false);
     }
-  }, [user, name, surname, phoneNumber, walletId, updateUser, navigation]);
+  };
 
   return (
     <View style={styles.container}>
@@ -95,8 +97,8 @@ const EditProfileScreen = ({navigation}: {navigation: any}) => {
       <View style={styles.buttonContainer}>
         <CustomButton
           title="Save Changes"
-          onPress={onSave}
-          isLoading={isUserLoading}
+          onPress={handleSave}
+          isLoading={isUserLoading || isSubmitting}
         />
       </View>
     </View>

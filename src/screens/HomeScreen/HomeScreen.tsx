@@ -11,7 +11,13 @@ import {useApp} from '../../context/AppContext';
 import SpendingLimit from '../../components/SpendingLimit/SpendingLimit';
 
 const HomeScreen = ({navigation}: {navigation: any}) => {
-  const {transactions, user, isTransactionsLoading} = useApp();
+  const {
+    transactions,
+    user,
+    isTransactionsLoading,
+    isRefreshing,
+    refreshTransactions,
+  } = useApp();
 
   const monthlySpend = transactions.reduce((acc, item) => {
     if (item.type !== 'income') {
@@ -40,6 +46,8 @@ const HomeScreen = ({navigation}: {navigation: any}) => {
               <TransactionItem item={item} onPress={onTransactionPress} />
             )}
             ItemSeparatorComponent={Separator}
+            refreshing={isRefreshing}
+            onRefresh={refreshTransactions}
           />
         </View>
       </LoadingScreen>
