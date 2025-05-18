@@ -8,19 +8,16 @@ export const colors = {
     secondary: '#1C1C1E',
     tertiary: '#2C2C2E',
   },
-
   text: {
     primary: '#FFFFFF',
     secondary: '#EBEBF5',
     tertiary: '#EBEBF599',
     disabled: '#EBEBF54D',
   },
-
   border: {
     primary: '#38383A',
     secondary: '#48484A',
   },
-
   system: {
     red: '#FF3B30',
     orange: '#FF9500',
@@ -39,7 +36,6 @@ export const colors = {
     success: '#32D74B',
     info: '#0A84FF',
   },
-
   overlay: {
     light: 'rgba(0, 0, 0, 0.3)',
     medium: 'rgba(0, 0, 0, 0.5)',
