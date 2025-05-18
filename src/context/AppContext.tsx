@@ -39,7 +39,7 @@ export const AppProvider: React.FC<{children: React.ReactNode}> = ({
       setTransactions(transactionsRes.data);
       setUser(userRes.data);
     } catch (err) {
-      setError('Failed to fetch data');
+      setError('Failed to get data');
       console.error('Error fetching data:', err);
     } finally {
       setIsTransactionsLoading(false);

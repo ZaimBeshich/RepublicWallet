@@ -7,9 +7,6 @@ export const getCurrencySymbol = (currency: string): string => {
     CNY: '¥',
     JPY: '¥',
     KZT: '₸',
-    BYN: 'Br',
-    UAH: '₴',
-    CHF: 'Fr',
   };
 
   return currencySymbols[currency] || currency;

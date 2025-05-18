@@ -4,13 +4,18 @@ import {Navigation} from './src/navigation/Navigation';
 import {theme} from './src/res/theme';
 import {AppProvider, useApp} from './src/context/AppContext';
 import {StyleSheet, View} from 'react-native';
+import {ErrorScreen} from './src/components/ErrorScreen/ErrorScreen';
 
 const AppContent = () => {
-  const {init} = useApp();
+  const {init, error} = useApp();
 
   useEffect(() => {
     init();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  if (error) {
+    return <ErrorScreen error={error} onRetry={init} />;
+  }
 
   return <Navigation theme={theme} />;
 };

@@ -2,8 +2,8 @@
 export const ROOT_MAIN = 'RootMain';
 
 // Tab Navigation
-export const STACK_HOME = 'HomeTab';
-export const STACK_PROFILE = 'ProfileTab';
+export const STACK_HOME = 'Home';
+export const STACK_PROFILE = 'Profile';
 
 // Home Stack
 export const SCREEN_HOME = 'HomeMain';

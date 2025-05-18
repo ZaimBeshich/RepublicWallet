@@ -6,7 +6,10 @@ const USER_ID = 'USER-1';
 
 const handleResponse = async (response: Response) => {
   if (!response.ok) {
-    throw new Error(`HTTP error! status: ${response.status}`);
+    const errorData = await response.json().catch(() => ({}));
+    throw new Error(
+      errorData.message || `HTTP error! status: ${response.status}`,
+    );
   }
   const data = await response.json();
   return {data, status: response.status};
@@ -19,8 +22,9 @@ export const api = {
       const response = await fetch(`${API_URL}/transactions`);
       return handleResponse(response);
     } catch (error) {
-      console.error('Error fetching transactions:', error);
-      throw error;
+      throw new Error(
+        error instanceof Error ? error.message : 'Failed to fetch transactions',
+      );
     }
   },
 
@@ -30,8 +34,9 @@ export const api = {
       const response = await fetch(`${API_URL}/users/${USER_ID}`);
       return handleResponse(response);
     } catch (error) {
-      console.error('Error fetching user:', error);
-      throw error;
+      throw new Error(
+        error instanceof Error ? error.message : 'Failed to fetch user',
+      );
     }
   },
 
@@ -47,8 +52,9 @@ export const api = {
       });
       return handleResponse(response);
     } catch (error) {
-      console.error('Error updating user:', error);
-      throw error;
+      throw new Error(
+        error instanceof Error ? error.message : 'Failed to update user',
+      );
     }
   },
 
@@ -76,8 +82,11 @@ export const api = {
       });
       return handleResponse(response);
     } catch (error) {
-      console.error('Error updating user settings:', error);
-      throw error;
+      throw new Error(
+        error instanceof Error
+          ? error.message
+          : 'Failed to update user settings',
+      );
     }
   },
 };
