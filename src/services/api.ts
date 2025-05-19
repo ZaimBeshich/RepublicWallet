@@ -22,9 +22,7 @@ export const api = {
       const response = await fetch(`${API_URL}/transactions`);
       return handleResponse(response);
     } catch (error) {
-      throw new Error(
-        error instanceof Error ? error.message : 'Failed to fetch transactions',
-      );
+      throw new Error('Failed to fetch transactions');
     }
   },
 
@@ -34,11 +32,7 @@ export const api = {
       const response = await fetch(`${API_URL}/transactions`);
       return handleResponse(response);
     } catch (error) {
-      throw new Error(
-        error instanceof Error
-          ? error.message
-          : 'Failed to update transactions',
-      );
+      throw new Error('Failed to update transactions');
     }
   },
   getUser: async (): Promise<ApiResponse<User>> => {
@@ -47,9 +41,7 @@ export const api = {
       const response = await fetch(`${API_URL}/users/${USER_ID}`);
       return handleResponse(response);
     } catch (error) {
-      throw new Error(
-        error instanceof Error ? error.message : 'Failed to fetch user',
-      );
+      throw new Error('Failed to get user');
     }
   },
 
@@ -65,9 +57,7 @@ export const api = {
       });
       return handleResponse(response);
     } catch (error) {
-      throw new Error(
-        error instanceof Error ? error.message : 'Failed to update user',
-      );
+      throw new Error('Failed to update user');
     }
   },
 
@@ -95,11 +85,7 @@ export const api = {
       });
       return handleResponse(response);
     } catch (error) {
-      throw new Error(
-        error instanceof Error
-          ? error.message
-          : 'Failed to update user settings',
-      );
+      throw new Error('Failed to update user settings');
     }
   },
 };

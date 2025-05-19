@@ -1,7 +1,28 @@
 import {Theme} from '@react-navigation/native';
 import {colors} from './colors';
 
-export const theme: Theme = {
+interface CustomTheme extends Theme {
+  fonts: {
+    regular: {
+      fontFamily: string;
+      fontWeight: string;
+    };
+    medium: {
+      fontFamily: string;
+      fontWeight: string;
+    };
+    bold: {
+      fontFamily: string;
+      fontWeight: string;
+    };
+    heavy: {
+      fontFamily: string;
+      fontWeight: string;
+    };
+  };
+}
+
+export const theme: CustomTheme = {
   dark: true,
   colors: {
     primary: colors.primary,
