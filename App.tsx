@@ -26,10 +26,6 @@ const AppContent = () => {
     }
   }, [networkError, setNetworkError]);
 
-  useEffect(() => {
-    init();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
   if (error) {
     return <ErrorScreen error={error} onRetry={init} />;
   }

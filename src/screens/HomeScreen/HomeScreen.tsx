@@ -1,5 +1,5 @@
 import {View, FlatList} from 'react-native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import Header from '../../components/Header/Header';
 import {Transaction} from '../../types/api';
 import {SCREEN_TRANSACTION_DETAILS} from '../../res/routes';
@@ -17,7 +17,12 @@ const HomeScreen = ({navigation}: {navigation: any}) => {
     isTransactionsLoading,
     isRefreshing,
     refreshTransactions,
+    init,
   } = useApp();
+
+  useEffect(() => {
+    init();
+  }, []);
 
   const monthlySpend = transactions.reduce((acc, item) => {
     if (item.type !== 'income') {

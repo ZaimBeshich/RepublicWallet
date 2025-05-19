@@ -55,15 +55,13 @@ export const AppProvider: React.FC<{children: React.ReactNode}> = ({
   const init = async () => {
     setIsTransactionsLoading(true);
     setIsUserLoading(true);
-    setError(null);
-    setNetworkError(null);
 
     try {
       await loadCachedData();
       await wait(5000);
-      const [transactionsRes, userRes] = await Promise.all([
-        api.getTransactions(),
+      const [userRes, transactionsRes] = await Promise.all([
         api.getUser(),
+        api.getTransactions(),
       ]);
 
       setTransactions(transactionsRes.data);
@@ -73,7 +71,10 @@ export const AppProvider: React.FC<{children: React.ReactNode}> = ({
         storage.saveTransactions(transactionsRes.data),
         storage.saveUser(userRes.data),
       ]);
+      setError(null);
+      setNetworkError(null);
     } catch (err) {
+      console.log('init err', err);
       setError(
         err instanceof Error ? err.message : 'Failed to fetch fresh data',
       );
@@ -85,15 +86,17 @@ export const AppProvider: React.FC<{children: React.ReactNode}> = ({
 
   const refreshTransactions = async () => {
     setIsRefreshing(true);
-    setError(null);
-    setNetworkError(null);
+
     const currentTransactions = transactions;
 
     try {
       const {data} = await api.updateTransaction();
       setTransactions(data);
       await storage.saveTransactions(data);
+
+      setNetworkError(null);
     } catch (err) {
+      console.log('refreshTransactions err', err);
       setTransactions(currentTransactions);
       const errorMessage =
         err instanceof Error ? err.message : 'Failed to refresh transactions';
@@ -105,7 +108,6 @@ export const AppProvider: React.FC<{children: React.ReactNode}> = ({
 
   const updateUser = async (userData: User) => {
     setIsUserLoading(true);
-    setNetworkError(null);
 
     const currentUser = user;
 
@@ -113,7 +115,9 @@ export const AppProvider: React.FC<{children: React.ReactNode}> = ({
       const {data} = await api.updateUser(userData);
       setUser(data);
       await storage.saveUser(data);
+      setNetworkError(null);
     } catch (err) {
+      console.log('updateUser err', err);
       setUser(currentUser);
       const errorMessage =
         err instanceof Error ? err.message : 'Failed to update user';
@@ -125,7 +129,6 @@ export const AppProvider: React.FC<{children: React.ReactNode}> = ({
 
   const updateUserSettings = async (settingsData: UserSettings) => {
     setIsUserLoading(true);
-    setNetworkError(null);
 
     const currentUser = user;
 
@@ -133,7 +136,9 @@ export const AppProvider: React.FC<{children: React.ReactNode}> = ({
       const {data} = await api.updateUserSettings(settingsData);
       setUser(data);
       await storage.saveUser(data);
+      setNetworkError(null);
     } catch (err) {
+      console.log('updateUserSettings err', err);
       setUser(currentUser);
       const errorMessage =
         err instanceof Error ? err.message : 'Failed to update user settings';
