@@ -55,6 +55,7 @@ const EditProfileScreen = ({navigation}: {navigation: any}) => {
               onChangeText={setName}
               placeholder="Enter your name"
               placeholderTextColor={colors.text.tertiary}
+              maxLength={30}
             />
           </View>
 
@@ -66,6 +67,7 @@ const EditProfileScreen = ({navigation}: {navigation: any}) => {
               onChangeText={setSurname}
               placeholder="Enter your surname"
               placeholderTextColor={colors.text.tertiary}
+              maxLength={30}
             />
           </View>
 
