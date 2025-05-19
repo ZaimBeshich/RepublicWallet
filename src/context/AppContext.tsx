@@ -74,13 +74,9 @@ export const AppProvider: React.FC<{children: React.ReactNode}> = ({
         storage.saveUser(userRes.data),
       ]);
     } catch (err) {
-      if (user || transactions.length > 0) {
-        setError(
-          err instanceof Error ? err.message : 'Failed to fetch fresh data',
-        );
-      } else {
-        setError(err instanceof Error ? err.message : 'Failed to fetch data');
-      }
+      setError(
+        err instanceof Error ? err.message : 'Failed to fetch fresh data',
+      );
     } finally {
       setIsTransactionsLoading(false);
       setIsUserLoading(false);
@@ -94,7 +90,7 @@ export const AppProvider: React.FC<{children: React.ReactNode}> = ({
     const currentTransactions = transactions;
 
     try {
-      const {data} = await api.getTransactions();
+      const {data} = await api.updateTransaction();
       setTransactions(data);
       await storage.saveTransactions(data);
     } catch (err) {
@@ -102,7 +98,6 @@ export const AppProvider: React.FC<{children: React.ReactNode}> = ({
       const errorMessage =
         err instanceof Error ? err.message : 'Failed to refresh transactions';
       setNetworkError(errorMessage);
-      throw new Error(errorMessage);
     } finally {
       setIsRefreshing(false);
     }
@@ -123,7 +118,6 @@ export const AppProvider: React.FC<{children: React.ReactNode}> = ({
       const errorMessage =
         err instanceof Error ? err.message : 'Failed to update user';
       setNetworkError(errorMessage);
-      throw new Error(errorMessage);
     } finally {
       setIsUserLoading(false);
     }
@@ -144,7 +138,6 @@ export const AppProvider: React.FC<{children: React.ReactNode}> = ({
       const errorMessage =
         err instanceof Error ? err.message : 'Failed to update user settings';
       setNetworkError(errorMessage);
-      throw new Error(errorMessage);
     } finally {
       setIsUserLoading(false);
     }

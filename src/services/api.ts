@@ -28,6 +28,19 @@ export const api = {
     }
   },
 
+  updateTransaction: async (): Promise<ApiResponse<Transaction[]>> => {
+    try {
+      await wait(1000);
+      const response = await fetch(`${API_URL}/transactions`);
+      return handleResponse(response);
+    } catch (error) {
+      throw new Error(
+        error instanceof Error
+          ? error.message
+          : 'Failed to update transactions',
+      );
+    }
+  },
   getUser: async (): Promise<ApiResponse<User>> => {
     try {
       await wait(800);
